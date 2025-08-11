@@ -1,74 +1,35 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>MindAR Shuriken Demo</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+  <meta charset="UTF-8">
+  <title>AR Fix</title>
+  <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.0/dist/mindar-image-aframe.prod.js"></script>
+</head>
+<body>
+  <a-scene
+    mindar-image="imageTargetSrc: assets/card.mind;"
+    loading-screen="enabled: false">
+    
+    <a-assets timeout="10000"> <!-- Increased timeout -->
+      <a-asset-item id="model" src="assets/Shuriken.glb"></a-asset-item>
+    </a-assets>
 
-    <!-- A-Frame -->
-    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
-
-    <!-- MindAR -->
-    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.0/dist/mindar-image-aframe.prod.js"></script>
-
-    <style>
-      body {
-        margin: 0;
-        overflow: hidden;
-      }
-      #loading {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        font-family: Arial, sans-serif;
-        z-index: 1000;
-      }
-    </style>
-  </head>
-  <body>
-    <div id="loading">Loading AR experience...</div>
-
-    <a-scene
-      mindar-image="imageTargetSrc: ./assets/card.mind; autoStart: true;"
-      vr-mode-ui="enabled: false"
-      device-orientation-permission-ui="enabled: false"
-      embedded
-      renderer="colorManagement: true; physicallyCorrectLights: true;"
-      loading-screen="enabled: false"
-    >
-      <!-- Asset Preload -->
-      <a-assets>
-        <a-asset-item id="shurikenModel" src="./assets/Shuriken.glb"></a-asset-item>
-        <img id="target-preview" src="./assets/card.png" crossorigin="anonymous" style="display: none;">
-      </a-assets>
-
-      <!-- Camera -->
-      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
-
-      <!-- Target content -->
-      <a-entity mindar-image-target="targetIndex: 0">
-        <a-gltf-model 
-          src="#shurikenModel" 
-          scale="0.3 0.3 0.3" 
-          position="0 0 0"
-          rotation="0 45 0">
-        </a-gltf-model>
-      </a-entity>
-    </a-scene>
+    <a-entity mindar-image-target="targetIndex: 0">
+      <a-gltf-model 
+        src="#model"
+        scale="0.5 0.5 0.5"
+        position="0 0 0">
+      </a-gltf-model>
+    </a-entity>
 
     <script>
-      document.querySelector('a-scene').addEventListener('loaded', function() {
-        document.getElementById('loading').style.display = 'none';
-      });
-
-      // Enhanced error handling
-      window.addEventListener('error', function(e) {
-        console.error('AR Error:', e);
-        const loading = document.getElementById('loading');
-        loading.innerHTML = 'Error loading AR.<br>1. Check file paths<br>2. Allow camera access<br>3. View on HTTPS';
-        loading.style.color = 'red';
+      // Debugging helpers
+      console.log("Starting AR...");
+      document.querySelector('a-scene').addEventListener('loaded', (e) => {
+        console.log("Scene loaded successfully!");
       });
     </script>
-  </body>
+  </a-scene>
+</body>
 </html>
