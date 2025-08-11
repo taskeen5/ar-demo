@@ -2,35 +2,59 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>AR Fixed</title>
+  <title>Taskeen's AR Demo</title>
+  <!-- LOAD IN THIS EXACT ORDER -->
+  <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image.prod.js"></script>
   <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image-aframe.prod.js"></script>
-  <style>body { margin: 0; }</style>
+  <style>
+    body { margin: 0; overflow: hidden; }
+    #status { 
+      position: absolute; 
+      top: 10px; 
+      left: 10px; 
+      color: white; 
+      z-index: 1000;
+      font-family: Arial;
+    }
+  </style>
 </head>
 <body>
+  <div id="status">Initializing AR...</div>
+  
   <a-scene
-    mindar-image="imageTargetSrc: assets/card.mind;"
-    loading-screen="enabled: false">
-    
-    <a-assets timeout="15000">
-      <a-asset-item id="model" src="assets/Shuriken.glb"></a-asset-item>
+    mindar-image="imageTargetSrc: https://taskeen5.github.io/ar-demo/assets/card.mind;"
+    loading-screen="enabled: false"
+    renderer="colorManagement: true">
+
+    <a-assets timeout="30000">
+      <a-asset-item id="model" src="https://taskeen5.github.io/ar-demo/assets/Shuriken.glb"></a-asset-item>
     </a-assets>
 
     <a-camera position="0 0 0"></a-camera>
 
+    <!-- TEST WITH THIS FIRST -->
     <a-entity mindar-image-target="targetIndex: 0">
-      <a-gltf-model
-        src="#model"
-        scale="0.3 0.3 0.3"
-        position="0 0 0"
-        rotation="0 0 0">
-      </a-gltf-model>
+      <a-box color="blue" scale="0.3 0.3 0.3" position="0 0 0"></a-box>
     </a-entity>
 
     <script>
-      // Debug output
-      console.log("AFrame version:", AFRAME.version);
-      console.log("MindAR version:", MindARThree.version);
+      // Debugging
+      const statusEl = document.getElementById('status');
+      const scene = document.querySelector('a-scene');
+      
+      scene.addEventListener('loaded', () => {
+        statusEl.textContent = "Scan the target image...";
+        console.log("Scene ready!", {
+          aframe: AFRAME.version,
+          mindar: MindARImage.version
+        });
+      });
+      
+      scene.addEventListener('error', (e) => {
+        statusEl.innerHTML = `Error: ${e.detail}<br>Check console`;
+        statusEl.style.color = 'red';
+      });
     </script>
   </a-scene>
 </body>
