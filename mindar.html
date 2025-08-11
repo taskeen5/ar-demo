@@ -30,14 +30,13 @@
 <body>
   <div id="status">Initializing AR...</div>
 
-  <a-scene
-    mindar-image="imageTargetSrc: ./assets/card.mind;"
+  <a-scene mindar-image="imageTargetSrc: ./assets/card.mind;">
     vr-mode-ui="enabled: false"
     loading-screen="enabled: false"
     renderer="colorManagement: true">
     
     <a-assets>
-      <a-asset-item id="model" src="./assets/Shuriken.glb"></a-asset-item>
+     <a-asset-item id="model" src="./assets/Shuriken.glb"></a-asset-item>
     </a-assets>
 
     <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
