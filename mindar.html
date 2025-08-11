@@ -29,8 +29,7 @@
     >
       <!-- Asset Preload -->
       <a-assets>
-        <!-- Example image to overlay on marker -->
-        <img id="overlay" src="./assets/overlay.png" />
+        <a-asset-item id="shurikenModel" src="./assets/Shuriken.glb"></a-asset-item>
       </a-assets>
 
       <!-- Camera -->
@@ -38,7 +37,11 @@
 
       <!-- Target content -->
       <a-entity mindar-image-target="targetIndex: 0">
-        <a-plane src="#overlay" position="0 0 0" height="1" width="1"></a-plane>
+        <a-gltf-model 
+          src="#shurikenModel" 
+          scale="0.1 0.1 0.1" 
+          position="0 -0.5 0">
+        </a-gltf-model>
       </a-entity>
     </a-scene>
   </body>
