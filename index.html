@@ -1,53 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My AR Experience</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      background: #f4f4f4;
-      color: #333;
-      padding: 40px;
+  <title>AR Newspaper Ad</title>
+  
+  <!-- Add this importmap FIRST -->
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.132.2/examples/jsm/"
+      }
     }
-    h1 {
-      color: #222;
-    }
-    
-    .container {
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      max-width: 500px;
-      margin: auto;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-    p {
-      font-size: 18px;
-      margin-top: 10px;
-    }
-  </style>
+  </script>
+  
+  <!-- Then your module script -->
+  <script type="module" src="script.js"></script>
 </head>
 <body>
-  <a href="mindar.html" style="
-  display:inline-block;
-  padding:10px 20px;
-  background:#4CAF50;
-  color:white;
-  text-decoration:none;
-  border-radius:5px;
-  font-weight:bold;
-  margin-top:20px;
-">
-🚀 Start AR Experience
-</a>
-
-  <div class="container">
-    <h1>🚀 Welcome to My AR Demo</h1>
-    <p>Point your camera at the newspaper ad to unlock the AR experience.</p>
-    <p>(This is just the starting page — AR content will load in the next step!)</p>
-  </div>
+  <h1>Point camera at newspaper ad</h1>
+  <div id="ar-container"></div>
 </body>
 </html>
